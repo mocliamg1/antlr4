@@ -593,7 +593,7 @@ func (p *BaseParser) IsExpectedToken(symbol int) bool {
 	for ctx != nil && ctx.GetInvokingState() >= 0 && following.contains(TokenEpsilon) {
 		invokingState := atn.states[ctx.GetInvokingState()]
 		rt := invokingState.GetTransitions()[0]
-		following = atn.NextTokens(rt.(*RuleTransition).followState, nil)
+		following = atn.NextTokens(rt.(*RuleTransition).FollowState, nil)
 		if following.contains(symbol) {
 			return true
 		}

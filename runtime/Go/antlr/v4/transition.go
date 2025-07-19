@@ -20,10 +20,10 @@ import (
 //  ATN transitions.</p>
 
 type Transition interface {
-	getTarget() ATNState
+	GetTarget() ATNState
 	setTarget(ATNState)
-	getIsEpsilon() bool
-	getLabel() *IntervalSet
+	GetIsEpsilon() bool
+	GetLabel() *IntervalSet
 	getSerializationType() int
 	Matches(int, int, int) bool
 }
@@ -52,7 +52,7 @@ func NewBaseTransition(target ATNState) *BaseTransition {
 	return t
 }
 
-func (t *BaseTransition) getTarget() ATNState {
+func (t *BaseTransition) GetTarget() ATNState {
 	return t.target
 }
 
@@ -60,11 +60,11 @@ func (t *BaseTransition) setTarget(s ATNState) {
 	t.target = s
 }
 
-func (t *BaseTransition) getIsEpsilon() bool {
+func (t *BaseTransition) GetIsEpsilon() bool {
 	return t.isEpsilon
 }
 
-func (t *BaseTransition) getLabel() *IntervalSet {
+func (t *BaseTransition) GetLabel() *IntervalSet {
 	return t.intervalSet
 }
 
@@ -164,7 +164,7 @@ func (t *AtomTransition) String() string {
 
 type RuleTransition struct {
 	BaseTransition
-	followState           ATNState
+	FollowState           ATNState
 	ruleIndex, precedence int
 }
 
@@ -177,7 +177,7 @@ func NewRuleTransition(ruleStart ATNState, ruleIndex, precedence int, followStat
 		},
 		ruleIndex:   ruleIndex,
 		precedence:  precedence,
-		followState: followState,
+		FollowState: followState,
 	}
 }
 
@@ -292,7 +292,7 @@ func (t *PredicateTransition) Matches(_, _, _ int) bool {
 	return false
 }
 
-func (t *PredicateTransition) getPredicate() *Predicate {
+func (t *PredicateTransition) GetPredicate() *Predicate {
 	return NewPredicate(t.ruleIndex, t.predIndex, t.isCtxDependent)
 }
 

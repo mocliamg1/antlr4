@@ -310,7 +310,7 @@ func predictionContextFromRuleContext(a *ATN, outerContext RuleContext) *Predict
 	state := a.states[outerContext.GetInvokingState()]
 	transition := state.GetTransitions()[0]
 
-	return SingletonBasePredictionContextCreate(parent, transition.(*RuleTransition).followState.GetStateNumber())
+	return SingletonBasePredictionContextCreate(parent, transition.(*RuleTransition).FollowState.GetStateNumber())
 }
 
 func merge(a, b *PredictionContext, rootIsWildcard bool, mergeCache *JPCMap) *PredictionContext {
